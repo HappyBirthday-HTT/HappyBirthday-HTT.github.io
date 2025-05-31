@@ -17,6 +17,13 @@
   <audio id="launchSound" preload="auto">
     <source src="https://assets.mixkit.co/active_storage/sfx/2014/2014-preview.mp3" type="audio/mpeg">
   </audio>
+  <audio id="countdownMusic" preload="auto" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="backgroundMusic" preload="auto" loop>
+    <source src="Cake.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
   
 
   <style>
@@ -1059,6 +1066,16 @@ function initCountdown() {
     const countdownSection = document.getElementById('countdown-section');
     const birthdayContent = document.getElementById('birthday-content');
     const messageElement = document.getElementById('countdown-message');
+    const countdownMusic = document.getElementById('countdownMusic');
+    const backgroundMusic = document.getElementById('backgroundMusic');
+
+    // Stop countdown music and play birthday music
+    countdownMusic.pause();
+    countdownMusic.currentTime = 0;
+    backgroundMusic.volume = 0.5;
+    backgroundMusic.play().catch(function(error) {
+      console.log("Birthday music play failed:", error);
+    });
 
     // Show final message
     messageElement.innerHTML = '🎉 CHÚC MỪNG SINH NHẬT! 🎉<br>Thời khắc đặc biệt đã đến!';
@@ -1119,6 +1136,13 @@ $(document).ready(function () {
   let lastScrollTop = 0;
   let scrollEnabled = false;
   let hasReachedValentine = false;
+  
+  // Play countdown music
+  const countdownMusic = document.getElementById('countdownMusic');
+  countdownMusic.volume = 0.5; // Set volume to 50%
+  countdownMusic.play().catch(function(error) {
+    console.log("Countdown music play failed:", error);
+  });
   
   // Lock scrolling initially
   $('body').css('overflow', 'hidden');
